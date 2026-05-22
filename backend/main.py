@@ -12,11 +12,21 @@ app.add_middleware(
 )
 
 app.include_router(predictions.router, prefix="/api")
-app.include_router(teams.router,       prefix="/api")
-app.include_router(fixtures.router,    prefix="/api")
+app.include_router(teams.router, prefix="/api")
+app.include_router(fixtures.router, prefix="/api")
 app.include_router(live.router)
 
+@app.get("/")
+def root():
+    return {
+        "message": "Sports AI API Running",
+        "docs": "/docs",
+        "health": "/health"
+    }
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "version": "2.0.0"}
+    return {
+        "status": "ok",
+        "version": "2.0.0"
+    }
