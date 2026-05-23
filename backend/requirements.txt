@@ -7,3 +7,5 @@ numpy
 scikit-learn
 xgboost
 python-dotenv
+understat
+aiohttp
