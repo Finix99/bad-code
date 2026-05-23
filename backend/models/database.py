@@ -8,8 +8,10 @@ import os
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+# Local fallback (prevents Railway startup crash)
 if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable not set")
+    DATABASE_URL = "sqlite:///./sports_ai.db"
+    print("WARNING: Using SQLite fallback database")
 
 # Railway compatibility fix
 if DATABASE_URL.startswith("postgres://"):
@@ -35,7 +37,7 @@ SessionLocal = sessionmaker(
 )
 
 # ---------------------------------------------------
-# BASE MODEL
+# BASE
 # ---------------------------------------------------
 
 class Base(DeclarativeBase):
